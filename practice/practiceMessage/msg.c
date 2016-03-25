@@ -1,0 +1,59 @@
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+
+#define BUFSZ 512
+
+struct message
+{
+	long msg_type;
+	char msg_text[BUFSZ];
+};
+
+int main (int argv, char **argc)
+{
+	int qid;
+	key_t key;
+	int len;
+	struct message msg;
+	if ((key = ftok(".",(int) "a")) == -1)
+	{
+		perror("ftok");
+		exit(1);
+	}
+	if ((qid = msgget(key, IPC_CREAT | 0666)) == -1)
+	{
+		perror("msgget");
+		exit(1);
+	}
+	printf("opened queue %d\n", qid);
+	puts("Please enter the message to queue:");
+	if ((fgets((&msg) -> msg_text, BUFSZ, stdin)) == NULL)
+	{
+		puts("no messages");
+		exit(1);
+	}
+	msg.msg_type = getpid();
+	len = strlen(msg.msg_text);
+	if ((msgsnd(qid, &msg, len, 0)) < 0)
+	{
+		perror("message posted");
+		exit(1);
+	}
+	if ((msgrcv(qid, &msg, BUFSZ, 0, 0)) < 0)
+	{
+		perror("msgrcv");
+		exit(1);
+	}
+	printf("messages is:%s, %ld\n", (&msg) -> msg_text, (&msg) -> msg_type);
+	if ((msgctl(qid, IPC_RMID, NULL)) < 0)
+	{
+		perror("msgctl");
+		exit(1);
+	}
+	exit(0);
+}
