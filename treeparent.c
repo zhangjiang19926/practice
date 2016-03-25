@@ -5,12 +5,12 @@
 #define OVERFLOW -1
 typedef char TElemType;
 
-//typedef struct PTNode
-//{
-	//TElemType data;
-	//int parent;
-//}PTNode;
-//
+typedef struct PTNode
+{
+	TElemType data;
+	int parent;
+}PTNode;
+
 //typedef struct
 //{
 	//PTNode nodes[MAX_TREE_SIZE];
