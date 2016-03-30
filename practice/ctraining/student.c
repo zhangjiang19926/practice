@@ -5,9 +5,9 @@ void Sort(float *grade, int length)/*利用冒泡进行排序的函数*/
 {
 	float tmp;
 	int i, j;
-	for (i = 0; i < length; ++i)
+	for (i = 0; i < length - 1; ++i)
 	{
-		for (j = i + 1; j < length; ++j)
+		for (j = i + 1; j < length - 1; ++j)
 			if (grade[i] < grade[j])	
 			{
 				tmp = grade[i];		
@@ -20,7 +20,7 @@ void Input(char stuName[][10], int *stuNum, float *grade, int length)/*输入成
 {
 	int i, j, flag = 1;
 	char c;
-	for (i = 0; i < length; ++i) 
+	for (i = 0; i < length - 1; ++i) 
 	{
 		printf("Please input %d student's information\n", i + 1);
 		printf("%d's studentname = ", i + 1);/*输入名字*/
@@ -48,18 +48,47 @@ void Output(char stuName[][10], float *grade, int length)/*输出成绩及姓名
 	}
 }
 
-void Insert(float *grade, int length)
+void Insert(float *grade, float grade_Insert, int length)
 {
-	
+	float tmp;
+	int i, j, num_tmp, flag;
+	*(grade + length - 1) = 0;
+	for (i = 0; i < length - 1; ++i)
+	{
+		if (*(grade + i) <= grade_Insert)
+		{
+			num_tmp = i;
+			for (i = length - 1; i >= length - num_tmp; --i)
+				*(grade + i) = *(grade + i - 1); 
+			*(grade + num_tmp) = grade_Insert;
+			flag = 0;
+			break;
+		}
+		else 
+			flag = 1;
+	}
+	if (flag == 1)
+		*(grade + length - 1) = grade_Insert;
+	//for (i = 0; i < length; ++i)
+	//{
+		//for (j = i + 1; j < length; ++j)
+			//if (grade[i] > grade[j])	
+			//{
+				//tmp = grade[i];		
+				//grade[i] = grade[j];
+				//grade[j] = tmp;
+			//}
+	//}
 }
 
 int main(int argc, char **argv)
 {
-	int stuNum[2];
-	float grade[2];	
-	char stuName[2][10];
-	Input(stuName, stuNum, grade, 2);
-	Sort(grade, 2);
-	Output(stuName, grade, 2);
+	int stuNum[5];
+	float grade[5];	
+	char stuName[5][10];
+	Input(stuName, stuNum, grade, 5);
+	Sort(grade, 5);
+	Insert(grade, 12, 5);
+	Output(stuName, grade, 5);
 	return 0;
 }
