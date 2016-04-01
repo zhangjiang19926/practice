@@ -1,6 +1,6 @@
 #!/usr/bin/python 
 #Filename:function.py
-def my_abs(x):
+def my_abs(x):#define a function 
 	if x >= 0:
 		return x
 	else:
