@@ -29,12 +29,14 @@ def add_end(L = None):
 	L.append("END")
 	return L
 L =  add_end(["abcdefg"])
-print L
-print add_end()
-print add_end()
-print add_end()
-print add_end()
-print add_end()
-print add_end()
-print add_end()
 
+def power(x, n = 2):
+	s = 1
+	while n > 0:
+		s = s * x
+		n = n-1
+	return s
+s2 = power(5, 3)
+s3 = power(5)
+print "s2 = ", s2
+print "s3 = ", s3
