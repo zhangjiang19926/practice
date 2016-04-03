@@ -98,3 +98,54 @@ for i, value in enumerate(["A","B","C"]):
 
 for x, y in [(1, 2), (2, 3), (3, 4)]:
 	print x, y
+
+L = []
+
+for x in range(1,11):
+	L.append(x*x)
+print L
+
+#List of formula
+print [x*x for x in range(1,11)]
+
+print [m + n for m in "ABC" for n in "XYZ"]
+
+print [x * x for x in range(1, 11) if x % 2 ==0]
+
+import os#input os module
+print [d for d in os.listdir(".")]#list the current dir's filenames
+
+d = {"A":1, "B":2, "C":3}
+for k, v in d.iteritems():
+	print k, "=", v
+
+d = {"A":'1', "B":'2', "C":'3'}
+print [k + "=" + v for k, v in d.iteritems()]#only use string
+
+L = ["Hello", "World", "!"]
+print [s.lower() for s in L]
+
+#creat a generator
+L = [x * x for x in range(1, 11)]
+g = (x * x for x in range(1, 11))
+print L
+#print g.next()
+#call a generator
+for a in g:
+	print a
+
+def fib(max):
+	n, a, b = 0, 0, 1
+	while n < max:
+		print b
+		a, b = b, a + b
+		n = n + 1
+def fibb(max):
+	n, a, b = 0, 0, 1
+	while n < max:
+		yield b
+		a, b = b, a + b
+		n = n + 1
+for x in fibb(6):
+	print x
+print fibb(6)
