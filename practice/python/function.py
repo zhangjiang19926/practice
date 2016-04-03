@@ -82,4 +82,19 @@ def fact_iter(n, product):
 s = fact(100)
 print "s = ", s
 
-	
+L = []	
+n = 1
+while n < 99:
+	L.append(n)
+	n += 2
+print L
+
+d = {"a":1, "b":2, "c":3}
+for key in d:
+	print key 
+
+for i, value in enumerate(["A","B","C"]):
+	print i, value
+
+for x, y in [(1, 2), (2, 3), (3, 4)]:
+	print x, y
