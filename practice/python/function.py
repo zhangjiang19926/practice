@@ -1,5 +1,5 @@
 #!/usr/bin/python 
-#-*-utf-8-*-
+#_*_utf-8_*_
 #Filename:function.py
 def my_abs(x):#define a function 
 	if x >= 0:
@@ -149,3 +149,125 @@ def fibb(max):
 for x in fibb(6):
 	print x
 print fibb(6)
+
+def add(x, y, f):
+	return f(x) + f(y)
+print add(-10, 10, abs)
+
+print map(abs, [-1,-2,-3,-4,-5])
+print map(str, [1, 2, 3, 5])
+
+def m(x, y):
+	return x * y
+
+def x(L):
+	print reduce(lambda x, y: x * y, L)
+x([1,2,3,4,5])
+
+def updown(s):
+	return s.title()
+L = map(lambda s:s.title(), ["af", "XBN", "xSg"])
+print L
+
+def is_odd(n):
+	return n % 2 == 1
+print filter(is_odd, [1,2,3,4,5,6])
+
+def primer(s):
+	if s == 1:
+		return 0
+	for x in range(2, s):
+		if s % x == 0: 
+			return 1
+	else:
+		return 0
+print filter(primer, range(1, 101))#filter the number
+print filter(lambda x:any(map(lambda y:x%y == 0,range(2,x))), range(1,101))
+print sorted(["a", "c", "z","b"])
+def reversed_cmp(x, y):
+	if x > y:
+		return -1
+	if x < y:
+		return 1
+	return 0
+print sorted([5, 2, 6,18, 1,12], reversed_cmp)
+
+def calc_sum(*aasum):
+	def sum():
+		asum = 0
+		for ax in aasum:
+			asum = asum + ax	
+		return asum
+	return sum
+f = calc_sum(1,2,3,4,5,6)
+print f()
+
+def count():
+	fs = []
+	for i in range(1,4):
+		def f(j):
+			def g():
+				return j * j
+			return g
+		fs.append(f(i))
+	return fs
+f1, f2, f3 = count()
+print f1()
+print f2()
+print f3()
+
+a,b,c = [(lambda j = i:j * j) for i in range(1,4)]
+print a(), b(), c()
+
+#decorator
+import functools
+def log(func):
+	@functools.wraps(func)
+	def wrapper(*args, **kw):
+		print "call %s():" %func.__name__
+		func()
+		return func(*args, **kw)
+	return wrapper
+@log
+def now():
+	print "2016.04.07"
+now()
+
+def log(text):
+	def decorator(func):
+		@functools.wraps(func)
+		def wrapper(*args, **kw):
+			print "%s %s():" %(text, func.__name__)
+			return func(*args, **kw)
+		return wrapper
+	return decorator
+@log("Hell world")
+def x():
+	print "2016.04.07"
+x()
+
+import functools
+def log(text):
+	if callable(text):
+		@functools.wraps(text)
+		def wrapper(*args, **kw):
+			 print "begin call" +text.__name__
+			 text(*args, **kw)
+			 print "end call" +text.__name__
+		return wrapper
+	else:
+		def decorator(func):
+			@functools.wraps(func)
+			def wrapper(*args, **kw):
+				print "Here" 
+				print "begin call %s" %func.__name__ 
+				func(*args, **kw)
+				print "end call" +text
+			return wrapper
+		return decorator
+@log("here")
+def test1():
+	print "doing1"
+test1()
+#test1()
+
