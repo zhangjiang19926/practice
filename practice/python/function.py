@@ -1,6 +1,13 @@
 #!/usr/bin/python 
 #_*_utf-8_*_
 #Filename:function.py
+
+#from __future__ import unicode_literals
+print "10 / 3 = ", 10 / 3
+print "10.0 / 3 = ", 10.0 / 3
+print "10 // 3 = ", 10 // 3
+print '\'xxx\' is unicode ?', isinstance("xxx", unicode)
+
 def my_abs(x):#define a function 
 	if x >= 0:
 		return x
@@ -276,3 +283,53 @@ print int2("10")
 import functools
 int2 = functools.partial(int, base = 2)
 print int2("10")
+
+#import functools
+#def func(n, x):
+#if x == 1:
+#n = 2
+#elif x == 2:
+#n = 3	
+#else:
+#n = "Hello World!"
+#return n
+#fun = functools.partial(func, x = 1)
+#print fun(0, x = 8)
+
+#use module
+import sys
+def test():
+	args = sys.argv
+	if len(args) == 1:
+		print "Hello World!"
+	elif len(args) == 2:
+		print "Hello, %s!" %args[1]
+	else:
+		print "too many arguments!"
+if __name__ == "__main__":
+	test()
+#use the other name which I take
+try:
+	import cStringIO as StringIO
+except ImportError:
+	import StringIO
+
+def __private_1(name):
+	return "Hello, %s" %name
+def __private_2(name):
+	return "Hi, %s" %name
+
+def greeting(name):
+	if len(name) > 3:
+		return __private_1(name)
+	else:
+		return __private_2(name)
+print __private_1("zhang")
+
+class Student(object):
+	def __init__(self, name, score):
+		self.name = name
+		self.score = score
+bart = Student("hello", 58)
+bart.age = 32
+print bart.name, bart.score, bart.age
