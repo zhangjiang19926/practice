@@ -326,6 +326,7 @@ def greeting(name):
 		return __private_2(name)
 print __private_1("zhang")
 
+#create a class 
 class Student(object):
 	def __init__(self, name, score):
 		self.name = name
@@ -333,3 +334,27 @@ class Student(object):
 bart = Student("hello", 58)
 bart.age = 32
 print bart.name, bart.score, bart.age
+
+#create a limit in the class 
+class Student(object):
+#def __init__(self, name, score):
+#		self.__name = name
+#		self.__score = score
+	def print_score(self):
+		print "%s: %s" %(self.__name, self.__score)
+	def get_name(self):
+		return self.__name
+	def get_score(self):
+		return self.__score
+	def set_score(self, score):
+		self.__score = score
+class zhangjiang(Student): 
+	def get_score(self):
+		self = 10
+		self = self + 10
+		return self
+zhang = zhangjiang()
+print isinstance(zhang, Student)
+zhang.set_score(88)
+print zhang.get_score()
+print dir(zhang) #show all the usage of zhang
