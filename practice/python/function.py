@@ -1,4 +1,4 @@
-#!/usr/bin/python 
+#/usr/bin/python 
 #_*_utf-8_*_
 #Filename:function.py
 
@@ -357,4 +357,21 @@ zhang = zhangjiang()
 print isinstance(zhang, Student)
 zhang.set_score(88)
 print zhang.get_score()
-print dir(zhang) #show all the usage of zhang
+#print dir(zhang) #show all the usage of zhang
+
+class Student(object):
+	pass
+s = Student()
+def set_age(self, age):
+	self.age = age
+from types import MethodType
+s.setage = MethodType(set_age, s, Student)#it must bind when you want to use is
+s.setage(22)
+print s.age
+
+class Student(object):
+	__slots__ = ('name', 'age')
+s = Student()
+s.name = zhang
+s.age = 25
+print dir(s)
